@@ -1,0 +1,15 @@
+language: python
+python:
+- '3.5'
+script:
+- flake8 .
+- bandit -r .
+deploy:
+  provider: pypi
+  user: briggsb
+  password:
+    secure: ciYp1g5aMFXpr5SM4ET+jD6eeMKq/3pp7A7bjjPGnExBtU0UFCISohFcMU8bt1nu+hM72Zmduru4g7nmpxEgp7Nddvgo5XZx+NkBrhaA79UH6f5p/toT1ee8cIzDgaPx+3LpQERm6vUm4NXsRxm0Ft40dZecVZvj494sBe0UC8D3u432+RqBcpIAK0/zcngypKrcy+aFJtezxinal/MLc3j1601dm6lhLKxTzcLUh/tWuqTQuCNeFV149et1cXAFyddMAtLqE7qYstlw7ZvGVS4v1QONBQVz5082+Zzz2UrHEJhh1nkOZ0vNBIWXlP7vm8m/6FPhFgD0CRpRAplOheFBkTJO0HPxF9xa5m/FAeAV/Yp1GodR4wRLyygjaXk4sF4EsrD75U+viVoOsxzi5hEVOyTYzwhjttM6aiBdV5yqUH9UeDW6glt3YtAT7/3kJqMY2/5FJcvucHOaZ/yEYIQGYUqtkBRnL/z46xiqXclj9T8aIvd7FeDVwCOz2Ay2+XkGI/Rlu4GOwrOtY9vAVAOlte9P90IIGGzrzVNbBhjmtQkPrQlWJitIj4rMOoqR6sBEygqtHmZy3SuevxHlH3E8bOggEqvpTx/KSbXoH0ffV9NLzTgeDkPbVa3xfEHnDC0gJd08eUEIAJdLX4bTVXkyPRSuHfakMfGS+xmjFGE=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: bbriggs/legos.dice
