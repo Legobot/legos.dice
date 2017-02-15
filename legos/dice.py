@@ -6,8 +6,15 @@ logger = logging.getLogger(__name__)
 
 
 class Roll(Lego):
-    def listening_for(self, message):
-        return message['text'].split()[0] == '!roll'
+    @staticmethod
+    def listening_for(message):
+        if message['test'] is not None:
+            try:
+                return message['text'].split()[0] == '!roll'
+            except Exception as e:
+                logger.error('Dice lego failed to check message text: %s'
+                             % e)
+                return False
 
     def handle(self, message):
         opts = None
