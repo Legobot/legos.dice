@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 class Roll(Lego):
     @staticmethod
     def listening_for(message):
-        if message['test'] is not None:
+        if message['text'] is not None:
             try:
                 return message['text'].split()[0] == '!roll'
             except Exception as e:
@@ -25,16 +25,25 @@ class Roll(Lego):
         except IndexError:
             logger.error('Could not identify message source in message: %s'
                          % str(message))
-        dice_string = message['text'].split()[1]
-        results = dice.roll(dice_string)
-        results_str = ', '.join([str(result) for result in results])
-        txt = "You Rolled: %s" % results_str
+        if len(message['text'].split()) > 1:
+            dice_string = message['text'].split()[1]
+            results = dice.roll(dice_string)
+            if isinstance(results, int):
+                results_str = str(results)
+            else:
+                results_str = ', '.join([str(result) for result in results])
+            txt = "You Rolled: %s" % results_str
+        else:
+            txt = "Roll what? Try !help roll"
         self.reply(message, txt, opts)
 
-    def get_name(self):
+    @staticmethod
+    def get_name():
         return 'roll'
 
-    def get_help(self):
+    @staticmethod
+    def get_help():
         help_text = "Roll some dice. Usage: " \
-                    "!roll 2d6t, !roll 6d6^3, !roll d20"
+                    "!roll 2d6t, !roll 6d6^3, !roll d20. "\
+                    "Reference: https://pypi.python.org/pypi/dice"
         return help_text
