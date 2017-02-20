@@ -19,7 +19,7 @@ descrption = 'xkcd comic fetcher plugin for Legobot'
 name = 'legos.dice'
 setup(
     name=name,
-    version='0.1.1',
+    version='0.1.2',
     namespace_packages=name.split('.')[:-1],
     license='GPLv3',
     description='Dice rolling plugin for Legobot',
